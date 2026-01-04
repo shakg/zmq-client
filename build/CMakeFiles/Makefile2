@@ -64,6 +64,7 @@ CMAKE_BINARY_DIR = /home/ishakgonul-plm-nb/Documents/zmq-client/build
 
 # The main recursive "all" target.
 all: CMakeFiles/zmq_tui_app.dir/all
+all: CMakeFiles/publisher.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -72,6 +73,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/zmq_tui_app.dir/clean
+clean: CMakeFiles/publisher.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -81,7 +83,7 @@ clean: CMakeFiles/zmq_tui_app.dir/clean
 CMakeFiles/zmq_tui_app.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/zmq_tui_app.dir/build.make CMakeFiles/zmq_tui_app.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/zmq_tui_app.dir/build.make CMakeFiles/zmq_tui_app.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ishakgonul-plm-nb/Documents/zmq-client/build/CMakeFiles --progress-num=1,2 "Built target zmq_tui_app"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ishakgonul-plm-nb/Documents/zmq-client/build/CMakeFiles --progress-num=3,4 "Built target zmq_tui_app"
 .PHONY : CMakeFiles/zmq_tui_app.dir/all
 
 # Build rule for subdir invocation for target.
@@ -99,6 +101,32 @@ zmq_tui_app: CMakeFiles/zmq_tui_app.dir/rule
 CMakeFiles/zmq_tui_app.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/zmq_tui_app.dir/build.make CMakeFiles/zmq_tui_app.dir/clean
 .PHONY : CMakeFiles/zmq_tui_app.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/publisher.dir
+
+# All Build rule for target.
+CMakeFiles/publisher.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/publisher.dir/build.make CMakeFiles/publisher.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/publisher.dir/build.make CMakeFiles/publisher.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ishakgonul-plm-nb/Documents/zmq-client/build/CMakeFiles --progress-num=1,2 "Built target publisher"
+.PHONY : CMakeFiles/publisher.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/publisher.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ishakgonul-plm-nb/Documents/zmq-client/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/publisher.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ishakgonul-plm-nb/Documents/zmq-client/build/CMakeFiles 0
+.PHONY : CMakeFiles/publisher.dir/rule
+
+# Convenience name for target.
+publisher: CMakeFiles/publisher.dir/rule
+.PHONY : publisher
+
+# clean rule for target.
+CMakeFiles/publisher.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/publisher.dir/build.make CMakeFiles/publisher.dir/clean
+.PHONY : CMakeFiles/publisher.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

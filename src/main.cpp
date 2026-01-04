@@ -15,22 +15,23 @@ void message_receiver(zmq::context_t& context) {
     subscriber.connect("tcp://localhost:5555");
     subscriber.set(zmq::sockopt::subscribe, "");
 
+    subscriber.set(zmq::sockopt::rcvtimeo, 100);
+
     while (running.load()) {
         zmq::message_t message;
         try {
-            auto result = subscriber.recv(message, zmq::recv_flags::dontwait);
-            if (result) {
+            auto result = subscriber.recv(message, zmq::recv_flags::none);
+            if (result && *result > 0) {
                 latest_message = std::string(
                     static_cast<const char*>(message.data()),
                     static_cast<size_t>(message.size())
                 );
             }
         } catch (const zmq::error_t& e) {
-            if (errno != EAGAIN) {
+            if (errno != EAGAIN && errno != ETIMEDOUT) {
                 std::cerr << "ZMQ error: " << e.what() << std::endl;
             }
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
 }
 
@@ -40,6 +41,8 @@ int main() {
     noecho();
     keypad(stdscr, TRUE);
     scrollok(stdscr, TRUE);
+
+    std::this_thread::sleep_for(std::chrono::seconds(1));
 
     zmq::context_t context(1);
     std::thread receiver_thread(message_receiver, std::ref(context));

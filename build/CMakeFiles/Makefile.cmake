@@ -106,4 +106,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/zmq_tui_app.dir/DependInfo.cmake"
+  "CMakeFiles/publisher.dir/DependInfo.cmake"
   )

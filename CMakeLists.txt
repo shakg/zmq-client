@@ -11,12 +11,25 @@ add_executable(zmq_tui_app
     src/main.cpp
 )
 
+add_executable(publisher
+    src/publisher.cpp
+)
+
 target_link_libraries(zmq_tui_app
     ${ZMQ_LIBRARIES}
     ncursesw
     pthread
 )
 
+target_link_libraries(publisher
+    ${ZMQ_LIBRARIES}
+    pthread
+)
+
 target_include_directories(zmq_tui_app PRIVATE
+    ${ZMQ_INCLUDE_DIRS}
+)
+
+target_include_directories(publisher PRIVATE
     ${ZMQ_INCLUDE_DIRS}
 )
