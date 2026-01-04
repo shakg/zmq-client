@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/zmq_tui_app.dir/src/main.cpp.o -o zmq_tui_app  -lzmq -lncursesw -lpthread 

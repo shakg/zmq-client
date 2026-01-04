@@ -1,0 +1,3 @@
+/home/ishakgonul-plm-nb/Documents/zmq-client/build/CMakeFiles/zmq_tui_app.dir
+/home/ishakgonul-plm-nb/Documents/zmq-client/build/CMakeFiles/edit_cache.dir
+/home/ishakgonul-plm-nb/Documents/zmq-client/build/CMakeFiles/rebuild_cache.dir
