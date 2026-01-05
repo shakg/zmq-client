@@ -1,6 +1,6 @@
-# ZMQ TUI Client
+# ZMQ TUI Client and Publisher
 
-A C++ TUI application using ncurses to display data from a ZMQ publisher.
+A C++ TUI application using ncurses to display data from a ZMQ publisher, with a FlatBuffers-enabled publisher.
 
 ## Dependencies
 
@@ -9,15 +9,15 @@ Install the required development libraries:
 ```bash
 # Ubuntu/Debian
 sudo apt-get update
-sudo apt-get install -y libncurses5-dev libzmq3-dev cmake g++
+sudo apt-get install -y libncurses5-dev libzmq3-dev cmake g++ libflatbuffers-dev flatbuffers-compiler
 
 # macOS
-brew install ncurses zeromq cmake
+brew install ncurses zeromq cmake flatbuffers
 ```
 
 ## FlatBuffers Schema
 
-The transmitter uses FlatBuffers for efficient binary serialization. The schema is defined in `schema/data.fbs`:
+The publisher uses FlatBuffers for efficient binary serialization. The schema is defined in `schema/data.fbs`:
 
 - **Message**: Contains sequence number, timestamp, payload string, and priority
 - **Timestamp**: Seconds and nanoseconds since epoch
@@ -27,7 +27,7 @@ To compile the schema:
 flatc --cpp schema/data.fbs
 ```
 
-This generates `data_generated.h` which is included by the transmitter.
+This generates `data_generated.h` which is included by the publisher.
 
 ## Build
 
@@ -46,18 +46,14 @@ make
 
 The TUI application connects to `tcp://localhost:5555` and displays received messages in a ncurses terminal UI. Press 'q' to quit.
 
-## Transmitter
+## Publisher
 
-The FlatBuffers transmitter runs on port 5556:
-
-```bash
-./transmitter
-```
-
-## Publisher Example
-
-To test, you can use the `zmq_pub.py` Python publisher:
+The C++ FlatBuffers publisher runs on port 5556:
 
 ```bash
-python3 zmq_pub.py
+./publisher
 ```
+
+The receiver (zmq_tui_app) listens on both:
+- Port 5555: String messages (original)
+- Port 5556: FlatBuffers messages (new)
