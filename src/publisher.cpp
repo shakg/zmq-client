@@ -14,7 +14,7 @@ int main() {
     publisher.set(zmq::sockopt::sndhwm, 0);
     publisher.bind("tcp://*:5555");
 
-    std::cout << "ZMQ Publisher (FlatBuffers) running on tcp://*:5556" << std::endl;
+    std::cout << "ZMQ Publisher (FlatBuffers) running on tcp://*:5555" << std::endl;
     std::cout << "Press Ctrl+C to stop" << std::endl;
 
     std::this_thread::sleep_for(std::chrono::seconds(1));

@@ -44,16 +44,20 @@ make
 ./zmq_tui_app
 ```
 
-The TUI application connects to `tcp://localhost:5555` and displays received messages in a ncurses terminal UI. Press 'q' to quit.
+The TUI application listens on two ports:
+- Port 5555: FlatBuffers telemetry messages
+- Port 5556: String messages
+
+Press 'q' to quit.
 
 ## Publisher
 
-The C++ FlatBuffers publisher runs on port 5556:
+The C++ FlatBuffers publisher runs on port 5555 (telemetry):
 
 ```bash
 ./publisher
 ```
 
 The receiver (zmq_tui_app) listens on both:
-- Port 5555: String messages (original)
-- Port 5556: FlatBuffers messages (new)
+- Port 5555: FlatBuffers telemetry messages (publisher)
+- Port 5556: String messages (legacy)
