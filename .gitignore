@@ -1,0 +1,19 @@
+# Build directories
+build/
+.cache/
+
+# IDE directories
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# CMake generated
+CMakeLists.txt.user
+CMakeCache.txt
+
+# Executables
+*.exe
+*.out
+*.app
