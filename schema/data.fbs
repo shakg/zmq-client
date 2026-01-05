@@ -1,0 +1,15 @@
+namespace DataMessage;
+
+struct Timestamp {
+  seconds: int64;
+  nanoseconds: int32;
+}
+
+table Message {
+  id: int32;
+  timestamp: Timestamp;
+  payload: string;
+  priority: int32;
+}
+
+root_type Message;

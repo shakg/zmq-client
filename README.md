@@ -15,6 +15,20 @@ sudo apt-get install -y libncurses5-dev libzmq3-dev cmake g++
 brew install ncurses zeromq cmake
 ```
 
+## FlatBuffers Schema
+
+The transmitter uses FlatBuffers for efficient binary serialization. The schema is defined in `schema/data.fbs`:
+
+- **Message**: Contains sequence number, timestamp, payload string, and priority
+- **Timestamp**: Seconds and nanoseconds since epoch
+
+To compile the schema:
+```bash
+flatc --cpp schema/data.fbs
+```
+
+This generates `data_generated.h` which is included by the transmitter.
+
 ## Build
 
 ```bash
@@ -30,7 +44,15 @@ make
 ./zmq_tui_app
 ```
 
-The application connects to `tcp://localhost:5555` and displays received messages in a ncurses terminal UI. Press 'q' to quit.
+The TUI application connects to `tcp://localhost:5555` and displays received messages in a ncurses terminal UI. Press 'q' to quit.
+
+## Transmitter
+
+The FlatBuffers transmitter runs on port 5556:
+
+```bash
+./transmitter
+```
 
 ## Publisher Example
 

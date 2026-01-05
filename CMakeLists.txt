@@ -28,8 +28,10 @@ target_link_libraries(publisher
 
 target_include_directories(zmq_tui_app PRIVATE
     ${ZMQ_INCLUDE_DIRS}
+    ${CMAKE_SOURCE_DIR}
 )
 
 target_include_directories(publisher PRIVATE
     ${ZMQ_INCLUDE_DIRS}
+    ${CMAKE_SOURCE_DIR}
 )
