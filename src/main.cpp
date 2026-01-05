@@ -11,13 +11,13 @@
 
 std::atomic<bool> running(true);
 
-void message_receiver(zmq::context_t& context) {
+void string_receiver(zmq::context_t& context) {
     zmq::socket_t subscriber(context, zmq::socket_type::sub);
-    subscriber.connect("tcp://localhost:5555");
+    subscriber.connect("tcp://localhost:5556");
     subscriber.setsockopt(ZMQ_SUBSCRIBE, "", 0);
     subscriber.set(zmq::sockopt::rcvtimeo, 500);
 
-    std::cout << "Subscriber connected to tcp://localhost:5555, waiting for messages..." << std::endl;
+    std::cout << "String receiver connected to tcp://localhost:5556, waiting for messages..." << std::endl;
 
     int count = 0;
     while (running.load()) {
@@ -39,11 +39,11 @@ void message_receiver(zmq::context_t& context) {
 
 void flatbuffers_receiver(zmq::context_t& context) {
     zmq::socket_t subscriber(context, zmq::socket_type::sub);
-    subscriber.connect("tcp://localhost:5556");
+    subscriber.connect("tcp://localhost:5555");
     subscriber.setsockopt(ZMQ_SUBSCRIBE, "", 0);
     subscriber.set(zmq::sockopt::rcvtimeo, 500);
 
-    std::cout << "FlatBuffers receiver connected to tcp://localhost:5556, waiting for messages..." << std::endl;
+    std::cout << "FlatBuffers receiver connected to tcp://localhost:5555, waiting for telemetry messages..." << std::endl;
 
     int count = 0;
     while (running.load()) {
@@ -60,7 +60,7 @@ void flatbuffers_receiver(zmq::context_t& context) {
                 if (verifier.VerifyBuffer<DataMessage::Message>()) {
                     auto msg = DataMessage::GetMessage(buffer);
 
-                    std::cout << "[" << count << "] Received FlatBuffers message:" << std::endl;
+                    std::cout << "[" << count << "] Received FlatBuffers telemetry message:" << std::endl;
                     std::cout << "  ID: " << msg->id() << std::endl;
                     std::cout << "  Timestamp: " << msg->timestamp()->seconds()
                               << "." << std::setw(9) << std::setfill('0') << msg->timestamp()->nanoseconds() << std::endl;
@@ -86,7 +86,7 @@ int main() {
     std::cout << "============" << std::endl;
 
     zmq::context_t context(1);
-    std::thread receiver_thread(message_receiver, std::ref(context));
+    std::thread string_thread(string_receiver, std::ref(context));
     std::thread flatbuffers_thread(flatbuffers_receiver, std::ref(context));
 
     std::cout << "Press 'q' to quit" << std::endl;
@@ -99,7 +99,7 @@ int main() {
         }
     }
 
-    receiver_thread.join();
+    string_thread.join();
     flatbuffers_thread.join();
     return 0;
 }

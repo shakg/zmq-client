@@ -12,7 +12,7 @@ int main() {
     zmq::context_t context(1);
     zmq::socket_t publisher(context, zmq::socket_type::pub);
     publisher.set(zmq::sockopt::sndhwm, 0);
-    publisher.bind("tcp://*:5556");
+    publisher.bind("tcp://*:5555");
 
     std::cout << "ZMQ Publisher (FlatBuffers) running on tcp://*:5556" << std::endl;
     std::cout << "Press Ctrl+C to stop" << std::endl;
